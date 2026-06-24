@@ -1,0 +1,19 @@
+{
+  "name": "electron-editor",
+  "version": "1.0.0",
+  "description": "A desktop code editor app built with Electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron . --no-sandbox"
+  },
+  "keywords": [
+    "electron",
+    "editor",
+    "code"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^31.0.0"
+  }
+}
