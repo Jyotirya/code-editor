@@ -3,22 +3,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hello Editor</title>
+  <title>NeoEdit</title>
   <link rel="stylesheet" href="style.css">
+  <script src="dist/renderer.bundle.js" defer></script>
 </head>
 <body>
-  <div class="bg-glow"></div>
-  <div class="container">
-    <div class="logo-container">
-      <div class="logo">&lt;/&gt;</div>
-      <div class="logo-shadow">&lt;/&gt;</div>
+  <div id="titlebar">
+    <div class="traffic-lights">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
     </div>
-    <h1>Hello Editor</h1>
-    <p class="subtitle">Week 1 Setup Complete</p>
-    <div class="status-badge">
-      <span class="dot"></span>
-      <span>electron-editor : ready</span>
+    <div class="title-text">NeoEdit</div>
+  </div>
+  
+  <div id="menubar">
+    <div class="menu-item" id="menu-file">
+      <span>File</span>
+      <div class="dropdown">
+        <div class="dropdown-item" data-action="new-file">New File <span class="shortcut">Ctrl+N</span></div>
+        <div class="dropdown-item" data-action="open-file">Open File... <span class="shortcut">Ctrl+O</span></div>
+        <div class="dropdown-item" data-action="open-folder">Open Folder... <span class="shortcut">Ctrl+Shift+O</span></div>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-item" data-action="save">Save <span class="shortcut">Ctrl+S</span></div>
+        <div class="dropdown-item" data-action="save-as">Save As... <span class="shortcut">Ctrl+Shift+S</span></div>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-item" data-action="close-tab">Close Tab <span class="shortcut">Ctrl+W</span></div>
+      </div>
     </div>
+    <div class="menu-item" id="menu-edit">
+      <span>Edit</span>
+      <div class="dropdown">
+        <div class="dropdown-item" data-action="undo">Undo <span class="shortcut">Ctrl+Z</span></div>
+        <div class="dropdown-item" data-action="redo">Redo <span class="shortcut">Ctrl+Y</span></div>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-item" data-action="cut">Cut <span class="shortcut">Ctrl+X</span></div>
+        <div class="dropdown-item" data-action="copy">Copy <span class="shortcut">Ctrl+C</span></div>
+        <div class="dropdown-item" data-action="paste">Paste <span class="shortcut">Ctrl+V</span></div>
+      </div>
+    </div>
+    <div class="menu-item" id="menu-view">
+      <span>View</span>
+      <div class="dropdown">
+        <div class="dropdown-item" data-action="toggle-sidebar">Toggle Sidebar <span class="shortcut">Ctrl+B</span></div>
+        <div class="dropdown-item" data-action="toggle-word-wrap">Toggle Word Wrap <span class="shortcut">Alt+Z</span></div>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-item" data-action="font-size-up">Increase Font Size <span class="shortcut">Ctrl+=</span></div>
+        <div class="dropdown-item" data-action="font-size-down">Decrease Font Size <span class="shortcut">Ctrl+-</span></div>
+        <div class="dropdown-item" data-action="font-size-reset">Reset Font Size <span class="shortcut">Ctrl+0</span></div>
+      </div>
+    </div>
+    <div class="menu-item" id="menu-help">
+      <span>Help</span>
+      <div class="dropdown">
+        <div class="dropdown-item" data-action="about">About NeoEdit</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tabbar">
+    <div id="tabs-container"></div>
+    <button id="new-tab-btn" title="New File">+</button>
+  </div>
+
+  <div id="workspace">
+    <div id="sidebar">
+      <div class="sidebar-header">EXPLORER</div>
+      <div id="file-tree"></div>
+    </div>
+    <div id="sidebar-resizer"></div>
+    <div id="editor-area">
+      <div id="editor-placeholder">Open a file to start editing</div>
+    </div>
+  </div>
+
+  <div id="statusbar">
+    <div class="status-left">
+      <span id="status-branch">⎇ main</span>
+      <span id="status-errors">⊘ 0 ⚠ 0</span>
+    </div>
+    <div class="status-right">
+      <span id="status-selection"></span>
+      <span id="status-cursor">Ln 1, Col 1</span>
+      <span id="status-eol">LF</span>
+      <span id="status-encoding">UTF-8</span>
+      <span id="status-language">Plain Text</span>
+    </div>
+  </div>
+  <div id="tree-context-menu" class="dropdown" style="position: absolute; display: none; z-index: 2000;">
+    <div class="dropdown-item" id="ctx-new-file">New File</div>
+    <div class="dropdown-item" id="ctx-new-folder">New Folder</div>
+    <div class="dropdown-divider"></div>
+    <div class="dropdown-item" id="ctx-rename">Rename</div>
+    <div class="dropdown-item" id="ctx-delete">Delete</div>
   </div>
 </body>
 </html>
